@@ -6,7 +6,7 @@
 3. Run `python3 milestone_1.py`
 
 
-###### Project Proposal
+## Project Proposal
 
 For the proposal, you have to finalize your teams of 3, propose an idea for your course project, describe the evaluation plan, and set up a project website with a page for this submission. If you have a team of 2, you'll have to either find someone to join you, or break up and join another team of 2. We expect you to maintain a private Github repository for the code, and an associated website.
 

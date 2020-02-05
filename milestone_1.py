@@ -32,6 +32,53 @@ else:
     import functools
     print = functools.partial(print, flush=True)
 
+missionXML='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+            <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            
+              <About>
+                <Summary>Hello world!</Summary>
+              </About>
+              
+            <ServerSection>
+              <ServerInitialConditions>
+                <Time>
+                    <StartTime>1000</StartTime>
+                    <AllowPassageOfTime>false</AllowPassageOfTime>
+                </Time>
+                <Weather>clear</Weather>
+              </ServerInitialConditions>
+              <ServerHandlers>
+                  <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/MalmoPlatform/Minecraft/run/saves/MalmoTestWorld"/>
+                  <ServerQuitFromTimeUp timeLimitMs="30000"/>
+                  <ServerQuitWhenAnyAgentFinishes/>
+                </ServerHandlers>
+              </ServerSection>
+              
+              <AgentSection mode="Survival">
+                <Name>MalmoTutorialBot</Name>
+                <AgentStart>
+                    <Placement x="-1216" y="4.0" z="-229" yaw="90"/>
+                    <Inventory>
+                        <InventoryItem slot="8" type="diamond_pickaxe"/>
+                    </Inventory>
+                </AgentStart>
+                <AgentHandlers>
+                  <ObservationFromFullStats/>
+                  <ObservationFromGrid>
+                      <Grid name="floor3x3">
+                        <min x="-1" y="-1" z="-1"/>
+                        <max x="1" y="-1" z="1"/>
+                      </Grid>
+                  </ObservationFromGrid>
+                  <ContinuousMovementCommands turnSpeedDegs="180"/>
+                  <InventoryCommands/>
+                  <AgentQuitFromTouchingBlockType>
+                      <Block type="diamond_block" />
+                  </AgentQuitFromTouchingBlockType>
+                </AgentHandlers>
+              </AgentSection>
+            </Mission>'''
+
 # Create default Malmo objects:
 
 agent_host = MalmoPython.AgentHost()
@@ -45,7 +92,7 @@ if agent_host.receivedArgument("help"):
     print(agent_host.getUsage())
     exit(0)
 
-my_mission = MalmoPython.MissionSpec()
+my_mission = MalmoPython.MissionSpec(missionXML, True)
 my_mission_record = MalmoPython.MissionRecordSpec()
 
 # Attempt to start a mission:

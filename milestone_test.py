@@ -70,6 +70,9 @@ class TabQAgent(object):
         
         # TODO: what should the new action value be?
         new_q = reward
+
+        if current_state == self.prev_s:
+            new_q = -100
         
         # assign the new action value to the Q-table
         self.q_table[self.prev_s][self.prev_a] = new_q
@@ -152,7 +155,7 @@ class TabQAgent(object):
             if is_first_action:
                 # wait until have received a valid observation
                 while True:
-                    time.sleep(0.1)
+                    time.sleep(2.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -167,7 +170,7 @@ class TabQAgent(object):
             else:
                 # wait for non-zero reward
                 while world_state.is_mission_running and current_r == 0:
-                    time.sleep(0.1)
+                    time.sleep(2.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -175,7 +178,7 @@ class TabQAgent(object):
                         current_r += reward.getValue()
                 # allow time to stabilise after action
                 while True:
-                    time.sleep(0.1)
+                    time.sleep(2.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -201,11 +204,8 @@ class TabQAgent(object):
         
     def drawQ( self, curr_x=None, curr_y=None ):
         scale = 40
-        world_x = 10
-        world_y = 20
-        tmp = curr_y
-        curr_y = curr_x
-        curr_x = tmp
+        world_x = 20
+        world_y = 10
         if self.canvas is None or self.root is None:
             self.root = tk.Tk()
             self.root.wm_title("Q-table")
@@ -231,10 +231,10 @@ class TabQAgent(object):
                     color = int( 255 * ( value - min_value ) / ( max_value - min_value )) # map value to 0-255
                     color = max( min( color, 255 ), 0 ) # ensure within [0,255]
                     color_string = '#%02x%02x%02x' % (255-color, color, 0)
-                    self.canvas.create_oval( (y + action_positions[action][1] - action_radius ) *scale,
-                                             (x + action_positions[action][0] - action_radius ) *scale,
-                                             (y + action_positions[action][1] + action_radius ) *scale,
-                                             (x + action_positions[action][0] + action_radius ) *scale, 
+                    self.canvas.create_oval( (x + action_positions[action][0] - action_radius ) *scale,
+                                             (y + action_positions[action][1] - action_radius ) *scale,
+                                             (x + action_positions[action][0] + action_radius ) *scale,
+                                             (y + action_positions[action][1] + action_radius ) *scale, 
                                              outline=color_string, fill=color_string )
         if curr_x is not None and curr_y is not None:
             self.canvas.create_oval( (curr_x + 0.5 - curr_radius ) * scale, 
@@ -243,6 +243,7 @@ class TabQAgent(object):
                                      (curr_y + 0.5 + curr_radius ) * scale, 
                                      outline="#fff", fill="#fff" )
         self.root.update()
+
 
 if sys.version_info[0] == 2:
     sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)  # flush print output immediately

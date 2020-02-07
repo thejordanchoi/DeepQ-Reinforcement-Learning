@@ -155,7 +155,7 @@ class TabQAgent(object):
             if is_first_action:
                 # wait until have received a valid observation
                 while True:
-                    time.sleep(2.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -170,7 +170,7 @@ class TabQAgent(object):
             else:
                 # wait for non-zero reward
                 while world_state.is_mission_running and current_r == 0:
-                    time.sleep(2.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -178,7 +178,7 @@ class TabQAgent(object):
                         current_r += reward.getValue()
                 # allow time to stabilise after action
                 while True:
-                    time.sleep(2.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)

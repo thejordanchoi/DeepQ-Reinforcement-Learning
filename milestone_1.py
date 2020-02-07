@@ -48,7 +48,7 @@ missionXML='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
                 <Weather>clear</Weather>
               </ServerInitialConditions>
               <ServerHandlers>
-                  <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/MalmoPlatform/Minecraft/run/saves/MalmoTestWorld"/>
+                  <FileWorldGenerator src="./MalmoTestWorld"/>
                   <ServerQuitFromTimeUp timeLimitMs="30000"/>
                   <ServerQuitWhenAnyAgentFinishes/>
                 </ServerHandlers>

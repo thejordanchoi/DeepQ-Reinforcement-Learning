@@ -10,7 +10,7 @@
         <Time><StartTime>1</StartTime></Time>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/MalmoPlatform/Minecraft/run/saves/MalmoTestWorld"/>
+      <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/>
 <!--      <FileWorldGenerator src="/MalmoTestWorld"/>
  -->
       <ServerQuitFromTimeUp timeLimitMs="20000"/>

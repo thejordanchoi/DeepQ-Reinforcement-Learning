@@ -69,7 +69,7 @@ class TabQAgent(object):
         old_q = self.q_table[self.prev_s][self.prev_a]
         
         # TODO: what should the new action value be?
-        new_q = old_q
+        new_q = reward
         
         # assign the new action value to the Q-table
         self.q_table[self.prev_s][self.prev_a] = new_q
@@ -81,7 +81,7 @@ class TabQAgent(object):
         old_q = self.q_table[self.prev_s][self.prev_a]
         
         # TODO: what should the new action value be?
-        new_q = old_q
+        new_q = reward
         
         # assign the new action value to the Q-table
         self.q_table[self.prev_s][self.prev_a] = new_q
@@ -201,8 +201,11 @@ class TabQAgent(object):
         
     def drawQ( self, curr_x=None, curr_y=None ):
         scale = 40
-        world_x = 6
-        world_y = 14
+        world_x = 10
+        world_y = 20
+        tmp = curr_y
+        curr_y = curr_x
+        curr_x = tmp
         if self.canvas is None or self.root is None:
             self.root = tk.Tk()
             self.root.wm_title("Q-table")
@@ -228,10 +231,10 @@ class TabQAgent(object):
                     color = int( 255 * ( value - min_value ) / ( max_value - min_value )) # map value to 0-255
                     color = max( min( color, 255 ), 0 ) # ensure within [0,255]
                     color_string = '#%02x%02x%02x' % (255-color, color, 0)
-                    self.canvas.create_oval( (x + action_positions[action][0] - action_radius ) *scale,
-                                             (y + action_positions[action][1] - action_radius ) *scale,
-                                             (x + action_positions[action][0] + action_radius ) *scale,
-                                             (y + action_positions[action][1] + action_radius ) *scale, 
+                    self.canvas.create_oval( (y + action_positions[action][1] - action_radius ) *scale,
+                                             (x + action_positions[action][0] - action_radius ) *scale,
+                                             (y + action_positions[action][1] + action_radius ) *scale,
+                                             (x + action_positions[action][0] + action_radius ) *scale, 
                                              outline=color_string, fill=color_string )
         if curr_x is not None and curr_y is not None:
             self.canvas.create_oval( (curr_x + 0.5 - curr_radius ) * scale, 

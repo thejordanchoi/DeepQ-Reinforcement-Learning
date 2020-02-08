@@ -10,7 +10,7 @@
         <Time><StartTime>1</StartTime></Time>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/>
+      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/MalmoPlatform/Minecraft/run/saves/MalmoTestWorld"/>
 <!--      <FileWorldGenerator src="/MalmoTestWorld"/>
  -->
       <ServerQuitFromTimeUp timeLimitMs="20000"/>
@@ -26,6 +26,11 @@
     <AgentHandlers>
       <DiscreteMovementCommands/>
       <ObservationFromFullStats/>
+
+      <ObservationFromDistance>
+        <Marker name="Goal" x="14" y="3" z="1"/>
+      </ObservationFromDistance>
+
       <RewardForTouchingBlockType>
         <Block reward="-100.0" type="lava" behaviour="onceOnly"/>
         <Block reward="100.0" type="lapis_block" behaviour="onceOnly"/>

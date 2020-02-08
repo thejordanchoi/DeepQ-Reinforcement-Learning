@@ -47,10 +47,10 @@ class TabQAgent(object):
     """Tabular Q-learning agent for discrete state/action spaces."""
 
     def __init__(self):
-        self.epsilon = 0.01 # chance of taking a random action instead of the best
+        self.epsilon = 0.05 # chance of taking a random action instead of the best
 
         self.logger = logging.getLogger(__name__)
-        if False: # True if you want to see more information
+        if True: # True if you want to see more information
             self.logger.setLevel(logging.DEBUG)
         else:
             self.logger.setLevel(logging.INFO)
@@ -70,9 +70,6 @@ class TabQAgent(object):
         
         # TODO: what should the new action value be?
         new_q = reward
-
-        if current_state == self.prev_s:
-            new_q = -100
         
         # assign the new action value to the Q-table
         self.q_table[self.prev_s][self.prev_a] = new_q
@@ -82,6 +79,9 @@ class TabQAgent(object):
         
         # retrieve the old action value from the Q-table (indexed by the previous state and the previous action)
         old_q = self.q_table[self.prev_s][self.prev_a]
+
+        # self.logger.debug("LAST KNOWN STATE: " + self.prev_s);
+        # self.logger.debug(agent_host.getworldState);
         
         # TODO: what should the new action value be?
         new_q = reward
@@ -95,11 +95,11 @@ class TabQAgent(object):
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text) # most recent observation
         self.logger.debug(obs)
-        if not u'XPos' in obs or not u'ZPos' in obs:
+        if not 'XPos' in obs or not 'ZPos' in obs:
             self.logger.error("Incomplete observation received: %s" % obs_text)
             return 0
-        current_s = "%d:%d" % (int(obs[u'XPos']), int(obs[u'ZPos']))
-        self.logger.debug("State: %s (x = %.2f, z = %.2f)" % (current_s, float(obs[u'XPos']), float(obs[u'ZPos'])))
+        current_s = "%d:%d" % (int(obs['XPos']), int(obs['ZPos']))
+        self.logger.debug("State: %s (x = %.2f, z = %.2f)" % (current_s, float(obs['XPos']), float(obs['ZPos'])))
         if current_s not in self.q_table:
             self.q_table[current_s] = ([0] * len(self.actions))
 
@@ -107,7 +107,7 @@ class TabQAgent(object):
         if self.prev_s is not None and self.prev_a is not None:
             self.updateQTable( current_r, current_s )
 
-        self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
+        self.drawQ( curr_x = int(obs['XPos']), curr_y = int(obs['ZPos']) )
 
         # select the next action
         rnd = random.random()
@@ -133,6 +133,8 @@ class TabQAgent(object):
 
         except RuntimeError as e:
             self.logger.error("Failed to send command: %s" % e)
+
+
 
         return current_r
 
@@ -162,7 +164,13 @@ class TabQAgent(object):
                     for reward in world_state.rewards:
                         current_r += reward.getValue()
                     if world_state.is_mission_running and len(world_state.observations)>0 and not world_state.observations[-1].text=="{}":
-                        total_reward += self.act(world_state, agent_host, current_r)
+                        self.logger.debug("OBSERVATION: ")
+                        obs_text = world_state.observations[-1]
+                        obs = json.loads(obs_text.text)
+                        distanceFromGoal = float(obs['distanceFromGoal'])
+                        penalty = -1 * (distanceFromGoal * 10) # penalty function for being further from goal
+                        self.logger.debug(penalty)
+                        total_reward = total_reward + self.act(world_state, agent_host, current_r) + penalty
                         break
                     if not world_state.is_mission_running:
                         break
@@ -185,7 +193,13 @@ class TabQAgent(object):
                     for reward in world_state.rewards:
                         current_r += reward.getValue()
                     if world_state.is_mission_running and len(world_state.observations)>0 and not world_state.observations[-1].text=="{}":
-                        total_reward += self.act(world_state, agent_host, current_r)
+                        self.logger.debug("OBSERVATION: ")
+                        obs_text = world_state.observations[-1]
+                        obs = json.loads(obs_text.text)
+                        distanceFromGoal = float(obs['distanceFromGoal'])
+                        penalty = -1 * (distanceFromGoal * 10) # penalty function for being further from goal
+                        self.logger.debug(penalty)
+                        total_reward = total_reward + self.act(world_state, agent_host, current_r) + penalty
                         break
                     if not world_state.is_mission_running:
                         break
@@ -204,8 +218,8 @@ class TabQAgent(object):
         
     def drawQ( self, curr_x=None, curr_y=None ):
         scale = 40
-        world_x = 20
-        world_y = 10
+        world_x = 6
+        world_y = 14
         if self.canvas is None or self.root is None:
             self.root = tk.Tk()
             self.root.wm_title("Q-table")
@@ -243,7 +257,6 @@ class TabQAgent(object):
                                      (curr_y + 0.5 + curr_radius ) * scale, 
                                      outline="#fff", fill="#fff" )
         self.root.update()
-
 
 if sys.version_info[0] == 2:
     sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)  # flush print output immediately
@@ -309,6 +322,7 @@ for i in range(num_repeats):
 
     # -- run the agent in the world -- #
     cumulative_reward = agent.run(agent_host)
+    #get agent
     print('Cumulative reward: %d' % cumulative_reward)
     cumulative_rewards += [ cumulative_reward ]
 

@@ -10,7 +10,7 @@
         <Time><StartTime>1</StartTime></Time>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/MalmoPlatform/Minecraft/run/saves/MalmoTestWorld"/>
+      <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/>
 <!--      <FileWorldGenerator src="/MalmoTestWorld"/>
  -->
       <ServerQuitFromTimeUp timeLimitMs="20000"/>
@@ -21,7 +21,7 @@
   <AgentSection mode="Survival">
     <Name>Cristina</Name>
     <AgentStart>
-      <Placement x="4.5" y="4.0" z="1.5" pitch="30" yaw="270"/>
+      <Placement x="4.5" y="4.0" z="1.5" pitch="30" yaw="0"/>
     </AgentStart>
     <AgentHandlers>
       <DiscreteMovementCommands/>

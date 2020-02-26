@@ -1,5 +1,7 @@
 # CS175 Project
 
+See <thejordanchoi.github.io> for project proposal details.
+
 **How to run the project:**
 1. Start the Malmo Minecraft client by running `./launchClient.sh` in the Minecraft directory
 2. Open a new terminal and navigate to the project folder. This should be where you cloned the git repo

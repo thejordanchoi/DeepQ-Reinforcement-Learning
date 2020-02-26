@@ -10,9 +10,9 @@
         <Time><StartTime>1</StartTime></Time>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/>
-<!--      <FileWorldGenerator src="/MalmoTestWorld"/>
- -->
+      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/MalmoTestWorld"/>
+<!-- JORDAN FILE PATH: <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/MalmoTestWorld"/> -->
+<!-- ANGELA FILE PATH: <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/> -->
       <ServerQuitFromTimeUp timeLimitMs="20000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>

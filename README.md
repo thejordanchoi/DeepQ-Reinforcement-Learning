@@ -1,6 +1,6 @@
 # CS175 Project
 
-See <thejordanchoi.github.io> for project proposal details.
+See <https://thejordanchoi.github.io> for project proposal details.
 
 **How to run the project:**
 1. Start the Malmo Minecraft client by running `./launchClient.sh` in the Minecraft directory

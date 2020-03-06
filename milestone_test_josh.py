@@ -61,8 +61,8 @@ class TabQAgent(object):
         self.logger.handlers = []
         self.logger.addHandler(logging.StreamHandler(sys.stdout))
 
-        self.actions = ["movenorth 1", "movesouth 1", "movewest 1", "moveeast 1"]
-
+        self.actions = ["movenorth 1", "movesouth 1", "movewest 1", "moveeast 1", "jumpnorth", "jumpsouth", "jumpeast", "jumpwest"]
+        #self.jumpactions = ["jumpnorth 1", "jumpsouth 1", "jumpeast 1", "jumpwest 1"]
         self.q_table = {}
         self.canvas = None
         self.root = None
@@ -183,7 +183,7 @@ class TabQAgent(object):
             if is_first_action:
                 # wait until have received a valid observation
                 while True:
- #                   time.sleep(0.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -207,7 +207,7 @@ class TabQAgent(object):
             else:
                 # wait for non-zero reward
                 while world_state.is_mission_running and current_r == 0:
- #                   time.sleep(0.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -215,7 +215,7 @@ class TabQAgent(object):
                         current_r += reward.getValue()
                 # allow time to stabilise after action
                 while True:
- #                   time.sleep(0.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)

@@ -362,7 +362,7 @@ for i in range(num_repeats):
     #get agent
     print('Cumulative reward: %d' % cumulative_reward)
     cumulative_rewards += [ cumulative_reward ]
-    print(cumulative_rewards)                        ##hehe
+    print(cumulative_rewards)                        
 
     # -- clean up -- #
     time.sleep(0.5) # (let the Mod reset)

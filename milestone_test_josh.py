@@ -50,7 +50,7 @@ else:
 class TabQAgent(object):
     """Tabular Q-learning agent for discrete state/action spaces."""
 
-    def __init__(self,epsilon=0.1, alpha=0.1, gamma=1.0):
+    def __init__(self,epsilon=0.05, alpha=0.1, gamma=1.0):
  #       self.epsilon = 0.0 # chance of taking a random action instead of the best
 
         self.logger = logging.getLogger(__name__)
@@ -326,7 +326,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 250
+    num_repeats = 1000
 
 cumulative_rewards = []
 for i in range(num_repeats):

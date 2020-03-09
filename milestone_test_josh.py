@@ -50,7 +50,7 @@ else:
 class TabQAgent(object):
     """Tabular Q-learning agent for discrete state/action spaces."""
 
-    def __init__(self,epsilon=0.05, alpha=0.1, gamma=1.0):
+    def __init__(self,epsilon=0.15, alpha=0.1, gamma=1.0):
  #       self.epsilon = 0.0 # chance of taking a random action instead of the best
 
         self.logger = logging.getLogger(__name__)
@@ -183,19 +183,19 @@ class TabQAgent(object):
             if is_first_action:
                 # wait until have received a valid observation
                 while True:
-                    time.sleep(0.1)
+                    time.sleep(0.5)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
                     for reward in world_state.rewards:
                         current_r += reward.getValue()
                     if world_state.is_mission_running and len(world_state.observations)>0 and not world_state.observations[-1].text=="{}":
-                        self.logger.debug("OBSERVATION: ")
+                        #self.logger.debug("OBSERVATION: ")
                         obs_text = world_state.observations[-1]
                         obs = json.loads(obs_text.text)
                         distanceFromGoal = float(obs['distanceFromGoal'])
                         penalty = -1 * (distanceFromGoal * 10) # penalty function for being further from goal
-                        self.logger.debug(penalty)
+                        #self.logger.debug(penalty)
                         total_reward = total_reward + self.act(world_state, agent_host, current_r) + penalty
                         print("total_reward after 1st action")
                         print(total_reward)
@@ -215,7 +215,7 @@ class TabQAgent(object):
                         current_r += reward.getValue()
                 # allow time to stabilise after action
                 while True:
-                    time.sleep(0.1)
+                    time.sleep(0.5)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -233,7 +233,7 @@ class TabQAgent(object):
                         print("also the penalty")
                         print(penalty)
                         total_reward = total_reward + self.act(world_state, agent_host, current_r) + penalty
-                        print("totla_reward after action")
+                        print("total_reward after action")
                         print(total_reward)
                         
                         break
@@ -255,8 +255,8 @@ class TabQAgent(object):
         
     def drawQ( self, curr_x=None, curr_y=None ):
         scale = 40
-        world_x = 6
-        world_y = 14
+        world_x = 15
+        world_y = 15
         if self.canvas is None or self.root is None:
             self.root = tk.Tk()
             self.root.wm_title("Q-table")

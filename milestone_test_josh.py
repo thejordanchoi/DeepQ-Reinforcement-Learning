@@ -326,7 +326,7 @@ max_retries = 3
 if agent_host.receivedArgument("test"):
     num_repeats = 1
 else:
-    num_repeats = 1000
+    num_repeats = 300
 
 cumulative_rewards = []
 for i in range(num_repeats):
@@ -372,3 +372,5 @@ print("Done.")
 print()
 print("Cumulative rewards for all %d runs:" % num_repeats)
 print(cumulative_rewards)
+
+np.savetxt("cumulative_rewards.txt", cumulative_rewards, delimiter=',')

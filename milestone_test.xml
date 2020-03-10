@@ -29,7 +29,7 @@
       <ObservationFromFullStats/>
 
       <ObservationFromDistance>
-        <Marker name="Goal" x="14" y="3" z="1"/>
+        <Marker name="Goal" x="8.5" y="5" z="8.5"/>
       </ObservationFromDistance>
 
       <RewardForTouchingBlockType>

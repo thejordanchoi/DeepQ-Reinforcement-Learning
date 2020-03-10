@@ -1,6 +1,6 @@
 # CS175 Project
 
-See <https://thejordanchoi.github.io/cs175/index/html> for project proposal details.
+See <https://thejordanchoi.github.io/cs175/> for project details.
 
 **How to run the project:**
 1. Start the Malmo Minecraft client by running `./launchClient.sh` in the Minecraft directory
@@ -8,7 +8,7 @@ See <https://thejordanchoi.github.io/cs175/index/html> for project proposal deta
 3. Run `python3 milestone_1.py`
 
 
-## Project Proposal
+## Malmo Minecraft Mazerunner
 
 **Summary of the Project**
 

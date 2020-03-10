@@ -116,7 +116,7 @@ class TabQAgent(object):
         
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text) # most recent observation
-        self.logger.debug(obs)
+        #self.logger.debug(obs)
         if not 'XPos' in obs or not 'ZPos' in obs:
             self.logger.error("Incomplete observation received: %s" % obs_text)
             return 0
@@ -161,7 +161,7 @@ class TabQAgent(object):
         except RuntimeError as e:
             self.logger.error("Failed to send command: %s" % e)
 
-        print(self.q_table) 
+        #print(self.q_table) UNCOMMENT TO SEE Q TABLE
 
         return current_r
 
@@ -184,16 +184,18 @@ class TabQAgent(object):
             if is_first_action:
                 # wait until have received a valid observation
                 while True:
-                    time.sleep(0.5)
+                    #time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
                     for reward in world_state.rewards:
                         current_r += reward.getValue()
                     if world_state.is_mission_running and len(world_state.observations)>0 and not world_state.observations[-1].text=="{}":
-                        #self.logger.debug("OBSERVATION: ")
                         obs_text = world_state.observations[-1]
                         obs = json.loads(obs_text.text)
+                        if(obs['LineOfSight']['type'] == 'redstone_block'):
+                            agent_host.sendCommand('jump -10')
+                            break;
                         distanceFromGoal = float(obs['distanceFromGoal'])
                         penalty = -1 * (distanceFromGoal * 10) # penalty function for being further from goal
                         #self.logger.debug(penalty)
@@ -208,7 +210,7 @@ class TabQAgent(object):
             else:
                 # wait for non-zero reward
                 while world_state.is_mission_running and current_r == 0:
-                    time.sleep(0.1)
+                    #time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
@@ -216,19 +218,24 @@ class TabQAgent(object):
                         current_r += reward.getValue()
                 # allow time to stabilise after action
                 while True:
-                    time.sleep(0.5)
+                    #time.sleep(0.1) #here
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)
                     for reward in world_state.rewards:
                         current_r += reward.getValue()
                     if world_state.is_mission_running and len(world_state.observations)>0 and not world_state.observations[-1].text=="{}":
-                        self.logger.debug("OBSERVATION: ")
+                        #self.logger.debug("OBSERVATION: ")
                         obs_text = world_state.observations[-1]
                         obs = json.loads(obs_text.text)
+                        #print(type(obs["LineOfSight"]))
+                        if(obs['LineOfSight']['type'] == 'redstone_block'):
+                            print('DIEEIEIEIIEIEIE')
+                            agent_host.sendCommand('jump -10')
+                            break;
                         distanceFromGoal = float(obs['distanceFromGoal'])
                         penalty = -1 * (distanceFromGoal * 10) # penalty function for being further from goal
-                        self.logger.debug(penalty)
+                        #self.logger.debug(penalty)
                         print("not first time, total reward")
                         print(total_reward)
                         print("also the penalty")
@@ -315,7 +322,7 @@ if agent_host.receivedArgument("help"):
     exit(0)
 
 # -- set up the mission -- #
-mission_file = './milestone_test.xml'
+mission_file = './xml_schema/milestone_test.xml'
 with open(mission_file, 'r') as f:
     print("Loading mission from %s" % mission_file)
     mission_xml = f.read()
@@ -351,8 +358,8 @@ for i in range(num_repeats):
     print("Waiting for the mission to start", end=' ')
     world_state = agent_host.getWorldState()
     while not world_state.has_mission_begun:
-        print(".", end="")
-        time.sleep(0.1)
+        #print(".", end="")
+        #time.sleep(0.1)
         world_state = agent_host.getWorldState()
         for error in world_state.errors:
             print("Error:",error.text)
@@ -366,7 +373,7 @@ for i in range(num_repeats):
     print(cumulative_rewards)                        
 
     # -- clean up -- #
-    time.sleep(0.5) # (let the Mod reset)
+    time.sleep(0.1) # (let the Mod reset)
 
 print("Done.")
 

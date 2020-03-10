@@ -5,14 +5,16 @@
     <Summary>Cliff walking mission based on Sutton and Barto.</Summary>
   </About>
 
+  <!-- JORDAN FILE PATH: <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/MalmoTestWorld"/> -->
+<!-- ANGELA FILE PATH: <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/> -->
+
   <ServerSection>
     <ServerInitialConditions>
         <Time><StartTime>1</StartTime></Time>
     </ServerInitialConditions>
+
     <ServerHandlers>
       <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/Mazerunner Jump"/>
-<!-- JORDAN FILE PATH: <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/MalmoTestWorld"/> -->
-<!-- ANGELA FILE PATH: <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/> -->
       <ServerQuitFromTimeUp timeLimitMs="20000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>
@@ -22,7 +24,7 @@
     <Name>Cristina</Name>
     <AgentStart>
       <!-- <Placement x="4.5" y="4.0" z="1.5" pitch="30" yaw="0"/> -->
-      <Placement x="8.5" y="5.0" z="13.5" pitch="0" yaw="180"/>
+      <Placement x="8.5" y="5.0" z="13.5" pitch="90" yaw="180"/>
     </AgentStart>
     <AgentHandlers>
       <DiscreteMovementCommands/>
@@ -32,14 +34,16 @@
         <Marker name="Goal" x="8.5" y="5" z="6.5"/>
       </ObservationFromDistance>
 
+      <ObservationFromRay/>
+
       <RewardForTouchingBlockType>
-        <Block reward="-100.0" type="lava" behaviour="onceOnly"/>
+        <Block reward="-100.0" type="redstone_block" behaviour="onceOnly"/>
         <Block reward="500.0" type="gold_block" behaviour="onceOnly"/>
         <Block reward="5000.0" type="diamond_block" behaviour="onceOnly"/>
       </RewardForTouchingBlockType>
       <RewardForSendingCommand reward="-1" />
       <AgentQuitFromTouchingBlockType>
-          <Block type="lava" />
+          <Block type="redstone_block" />
           <Block type="gold_block" />
           <Block type="diamond_block" />
       </AgentQuitFromTouchingBlockType>

@@ -10,7 +10,7 @@
         <Time><StartTime>1</StartTime></Time>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/Mazerunner Jump"/>
+      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/Mazerunner Jump"/>
 <!-- JORDAN FILE PATH: <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/MalmoTestWorld"/> -->
 <!-- ANGELA FILE PATH: <FileWorldGenerator src="/Users/theav/Documents/GitHub/CS175/MalmoTestWorld"/> -->
       <ServerQuitFromTimeUp timeLimitMs="20000"/>
@@ -22,14 +22,14 @@
     <Name>Cristina</Name>
     <AgentStart>
       <!-- <Placement x="4.5" y="4.0" z="1.5" pitch="30" yaw="0"/> -->
-      <Placement x="8.5" y="5.0" z="12.5" pitch="30" yaw="180"/>
+      <Placement x="8.5" y="5.0" z="13.5" pitch="0" yaw="180"/>
     </AgentStart>
     <AgentHandlers>
       <DiscreteMovementCommands/>
       <ObservationFromFullStats/>
 
       <ObservationFromDistance>
-        <Marker name="Goal" x="8.5" y="5" z="8.5"/>
+        <Marker name="Goal" x="8.5" y="5" z="6.5"/>
       </ObservationFromDistance>
 
       <RewardForTouchingBlockType>

@@ -5,7 +5,8 @@ See <https://thejordanchoi.github.io/CS175/> for project details.
 **How to run the project:**
 1. Start the Malmo Minecraft client by running `./launchClient.sh` in the Minecraft directory
 2. Navigate to the src folder. This should be where you cloned the git repo.
-3. Run `python3 Mazerunner.py`
+3. Move contents of worlds file to MalmoPlatform/Minecraft/run/saves/
+4. Run `python3 Mazerunner.py`
 
 
 ## Malmo Minecraft Mazerunner

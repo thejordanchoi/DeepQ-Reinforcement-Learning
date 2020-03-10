@@ -1,4 +1,5 @@
 from __future__ import print_function
+import numpy as np
 # ------------------------------------------------------------------------------------------------
 # Copyright (c) 2016 Microsoft Corporation
 # 

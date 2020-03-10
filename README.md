@@ -4,8 +4,8 @@ See <https://thejordanchoi.github.io/cs175/> for project details.
 
 **How to run the project:**
 1. Start the Malmo Minecraft client by running `./launchClient.sh` in the Minecraft directory
-2. Open a new terminal and navigate to the project folder. This should be where you cloned the git repo
-3. Run `python3 milestone_1.py`
+2. Navigate to the src folder. This should be where you cloned the git repo.
+3. Run `python3 Mazerunner.py`
 
 
 ## Malmo Minecraft Mazerunner

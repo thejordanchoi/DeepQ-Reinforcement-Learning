@@ -14,7 +14,7 @@
     </ServerInitialConditions>
 
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/Mazerunner Jump"/>
+      <FileWorldGenerator src="/Users/thejordanchoi/Documents/CS175/Project/worlds/Mazerunner Ambitious"/>
       <ServerQuitFromTimeUp timeLimitMs="20000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>

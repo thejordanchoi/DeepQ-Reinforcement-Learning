@@ -184,7 +184,7 @@ class TabQAgent(object):
             if is_first_action:
                 # wait until have received a valid observation
                 while True:
-                    #time.sleep(0.1)
+                    time.sleep(0.1)
                     world_state = agent_host.getWorldState()
                     for error in world_state.errors:
                         self.logger.error("Error: %s" % error.text)

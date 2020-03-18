@@ -105,22 +105,28 @@ Released   : 20140310
 			</div>
 			<p>Results were measured as the cumulative reward for each episode over the number of episodes. An expected result should show a positive relationship between the two variables. At first, the graph should initially dip into the negative region as the agent is penalized for movements and deaths. As the model continues exploring and exploiting, the model should eventually increase and peak at the optimal solution. Once the model peaks, slight deviations should show a scatter of points under the peak as a result of a positive non-zero epsilon value.<br><br>
 			The first map reflects the expected outcome of the graph without any unforeseen trends. As the first map is a simple path towards a goal, the agent finds the optimal path relatively early in training showing an initial negative trend and then switching to a positive trend after discovering the goal node for the first time.<br><br>
-			<img src="latex/images/1_simple.png">
+			</p>
+			<img src="latex/images/1_simple.png" alt="simple">
+			<p>
 			In the second map, the agent was quickly able to find the gold block early on as it was the very close to the starting node. This is reflected in the early trend line of consistent rewards of 220. The agent continues exploring and was able to find a more optimal path soon after discovering the gold block that the diamond block was more optimal and the trend quickly shifted, favoring a higher reward. This is reflected in the greater concentration of plots in the 800 range.<br><br>
-			<img src="latex/images/3_diamondgold_3.png">
+			</p>
+			<img src="latex/images/3_diamondgold_3.png" alt="diamondgold">
+			<p>
 			A similar trend from the second map, follows in the third map albeit slightly less obvious at first. At first, the agent learns how to reach the goal node without jumping however, it later discovers that jumping over a block would produce a more optimal, shorter path due to the cost associated with each step taken. The graph reflects this trend rather subtly between episodes 60 and 120 versus episodes 120 to the end. The first half shows a slightly smaller reward of roughly 7 steps compared to the slightly greater second half. This is a direct result of the number of steps the agent took to move around a hazard versus saving those steps by jumping over the hazard. Exploration of the map resulted in expected trends both before the agent began consistently discovering a path to the goal and after the agent discovered a path to the goal node<br><br>
-			<img src="latex/images/4_jump.png">
+			</p>
+			<img src="latex/images/4_jump.png" alt="jump">
+			<p>
 			The final map we tested involved a heavily more ambitious path to reach the optimal goal node. It was slightly larger and had multiple floors with multiple goal states. This map was created with the intention of placing the agent under more realistic conditions and stresses in the world of Minecraft. The resulting graph had the expected trends of exploration plots due to the epsilon being greater than zero however, the two concurrent trend lines of the graph were difficult to interpret. The lines represented the ending states of the agent learning how to reach the lesser reward of the gold block however, it pointed out different paths of reaching the gold block as well as pointing out a bug within our code.<br><br>
 			In Malmo, as soon as the agent touches the block with any part of its body, the goal is considered reached and the episode terminates. In the -485 cumulative reward range, the agent had learned to reach the goal node by climbing stairs and walking to the goal node. This state was further by roughly 16 blocks from the most optimal diamond block goal of which we were using to calculate the \verb|distance_from_goal| value. In the 10 cumulative reward range, the agent had learned to reach a block one floor beneath the goal we had intended for and jumped to touch its head to the goal; an unforeseen solution to reach the goal. This state was further by roughly 10 blocks from the most optimal goal node. This discrepancy of roughly 6 blocks explains the two trends when calculating the cumulative rewards of $-10 \times 6$ as found in the reward system. The agent had just began favoring the more optimal solution of touching its head to reach the goal node before the limit to the number of episodes was reached. We hypothesize that the agent would continue to learn the map after significantly more episodes to reach the more optimal goal state of the diamond block due to the nature of the agent having many more states to explore than those of the previous maps.<br><br>
-			<img src="latex/images/5_ambitious.png">
 			</p>
+			<img src="latex/images/5_ambitious.png" alt="ambitious">
 
 
 			<div class="title">
 				<h2>References</h2>
 			</div>
-			<p>[1]Choudhary, Ankit, et al.  “Introduction to Deep Q-Learning for Reinforcement Learning (in Python).”Analytics Vidhya, 6 May 2019, www.analyticsvidhya.com/blog/2019/04/introduction-deep-q-learning-python/.<br><br>
-			[2]Ossenkopp, Philip, et al. “Reinforcement Learning – Part 1: Introduction to Q-Learning.” Novatec, 13 Feb. 2020, www.novatec-gmbh.de/en/blog/introduction-to-q-learning/.<br><br>
+			<p>[1] Choudhary, Ankit, et al.  “Introduction to Deep Q-Learning for Reinforcement Learning (in Python).”Analytics Vidhya, 6 May 2019, www.analyticsvidhya.com/blog/2019/04/introduction-deep-q-learning-python/.<br><br>
+			[2] Ossenkopp, Philip, et al. “Reinforcement Learning – Part 1: Introduction to Q-Learning.” Novatec, 13 Feb. 2020, www.novatec-gmbh.de/en/blog/introduction-to-q-learning/.<br><br>
 			[3] Violante, Andre. “Simple Reinforcement Learning: Q-Learning.” Medium, Towards Data Science, 1 July 2019, towardsdatascience.com/simple-reinforcement-learning-q-learning-fcddc4b6fe56. 
 			</p>
 		</div>

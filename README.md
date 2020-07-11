@@ -1,6 +1,6 @@
 # Malmo Reinforcement Learning
 
-See <https://thejordanchoi.github.io/CS175/> for project details.
+See <https://thejordanchoi.github.io/DeepQ-Reinforcement-Learning/> for project details.
 
 **How to run the project:**
 1. Start the Malmo Minecraft client by running `./launchClient.sh` in the Minecraft directory

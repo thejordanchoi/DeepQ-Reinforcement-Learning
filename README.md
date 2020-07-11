@@ -1,4 +1,4 @@
-# CS175 Project
+# Malmo Reinforcement Learning
 
 See <https://thejordanchoi.github.io/CS175/> for project details.
 
